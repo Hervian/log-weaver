@@ -6,7 +6,7 @@ import java.util.HashMap;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.VariableElement;
 
-import com.github.hervian.log_weaver.LogAfter;
+import com.github.hervian.log_weaver.LogExiting;
 
 public class LogAfterWeavingTask extends WeavingTask {
 
@@ -26,7 +26,7 @@ public class LogAfterWeavingTask extends WeavingTask {
 
 	@Override
 	public Class<? extends Annotation> getLogAnnotationClass() {
-		return LogAfter.class;
+		return LogExiting.class;
 	}
 	
 }

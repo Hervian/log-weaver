@@ -3,9 +3,9 @@ package com.github.hervian.logweaver;
 import java.util.concurrent.Callable;
 import java.util.logging.Logger;
 
-import com.github.hervian.log_weaver.LogAfter;
-import com.github.hervian.log_weaver.LogAround;
-import com.github.hervian.log_weaver.LogBefore;
+import com.github.hervian.log_weaver.LogExiting;
+import com.github.hervian.log_weaver.LogEnteringAndExiting;
+import com.github.hervian.log_weaver.LogEntering;
 import com.ibm.commerce.foundation.common.util.logging.LoggingHelper.LoggerForTest;
 
 
@@ -34,7 +34,7 @@ public class ClassWithLogAnnotatedMethods {
 		
 	public static class LogBefore_log1ArgumentAndThis {
 		public static LoggerForTest logger;
-		@LogBefore({ "arg1", "this" })
+		@LogEntering({ "arg1", "this" })
 		public String execute(String arg1) {
 			print(FIRST_LINE_IN_METHOD_IN_SOURCE_CODE);
 			print(LINE_BEFORE_RETURN_STATEMENT);
@@ -44,7 +44,7 @@ public class ClassWithLogAnnotatedMethods {
 
 	public static class LogAfter_NoArgsSpecified {
 		public static LoggerForTest logger;
-		@LogAfter
+		@LogExiting
 		public String execute(String arg1) {
 			print(FIRST_LINE_IN_METHOD_IN_SOURCE_CODE);
 			print(LINE_BEFORE_RETURN_STATEMENT);
@@ -54,7 +54,7 @@ public class ClassWithLogAnnotatedMethods {
 	
 	public static class LogAround_log1ArgumentAndThis {
 		public static LoggerForTest logger;
-		@LogAround({ "arg1", "this" })
+		@LogEnteringAndExiting({ "arg1", "this" })
 		public String execute(String arg1) {
 			print(FIRST_LINE_IN_METHOD_IN_SOURCE_CODE);
 			print(LINE_BEFORE_RETURN_STATEMENT);
@@ -64,7 +64,7 @@ public class ClassWithLogAnnotatedMethods {
 	
 	public static class LogAround_log2Arguments {
 		public static LoggerForTest logger;
-		@LogAround({ "arg1", "arg2" })
+		@LogEnteringAndExiting({ "arg1", "arg2" })
 		public String execute(String arg1, String arg2) {
 			print(FIRST_LINE_IN_METHOD_IN_SOURCE_CODE);
 			print(LINE_BEFORE_RETURN_STATEMENT);
@@ -74,7 +74,7 @@ public class ClassWithLogAnnotatedMethods {
 	
 	public static class LogAround_logNoArguments {
 		public static LoggerForTest logger;
-		@LogAround
+		@LogEnteringAndExiting
 		public String execute(String arg1, String arg2) {
 			print(FIRST_LINE_IN_METHOD_IN_SOURCE_CODE);
 			print(LINE_BEFORE_RETURN_STATEMENT);
@@ -84,7 +84,7 @@ public class ClassWithLogAnnotatedMethods {
 	
 	public static class LogAround_log1ArgumentOf2 {
 		public static LoggerForTest logger;
-		@LogAround({ "arg2" })
+		@LogEnteringAndExiting({ "arg2" })
 		public String execute(String arg1, String arg2) {
 			print(FIRST_LINE_IN_METHOD_IN_SOURCE_CODE);
 			print(LINE_BEFORE_RETURN_STATEMENT);
@@ -94,7 +94,7 @@ public class ClassWithLogAnnotatedMethods {
 	
 	public static class LogAround_log1Argument_void {
 		public static LoggerForTest logger;
-		@LogAround("arg1")
+		@LogEnteringAndExiting("arg1")
 		public void execute(String arg1) {
 			print(FIRST_LINE_IN_METHOD_IN_SOURCE_CODE);
 			print(LINE_BEFORE_RETURN_STATEMENT);
@@ -103,7 +103,7 @@ public class ClassWithLogAnnotatedMethods {
 	
 	public static class LogAround_log1Argument_testPrimitives {
 		public static LoggerForTest logger;
-		@LogAround({"arg1", "arg2", "arg3", "arg4", "arg5", "arg6", "arg7", "arg8"})
+		@LogEnteringAndExiting({"arg1", "arg2", "arg3", "arg4", "arg5", "arg6", "arg7", "arg8"})
 		public String execute(float arg1, boolean arg2, char arg3, long arg4, double arg5, short arg6, byte arg7, int arg8) {
 			print(FIRST_LINE_IN_METHOD_IN_SOURCE_CODE);
 			print(LINE_BEFORE_RETURN_STATEMENT);
@@ -113,7 +113,7 @@ public class ClassWithLogAnnotatedMethods {
 	
 	public static class LogAround_log1Argument_TwoReturnStatements {
 		public static LoggerForTest logger;
-		@LogAround({"chooseConditionalReturn"})
+		@LogEnteringAndExiting({"chooseConditionalReturn"})
 		public String execute(boolean chooseConditionalReturn) {
 			print(FIRST_LINE_IN_METHOD_IN_SOURCE_CODE);
 			if (chooseConditionalReturn) {
@@ -130,7 +130,7 @@ public class ClassWithLogAnnotatedMethods {
 	public Object main2(String[] args) throws Exception {
 		print("first line in outer method");
 		return new Callable<String>(){
-			@LogAround
+			@LogEnteringAndExiting
 			public String call() throws Exception {
 				return "in Callable";
 			}

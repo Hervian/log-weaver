@@ -21,9 +21,9 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic.Kind;
 
-import com.github.hervian.log_weaver.LogAfter;
-import com.github.hervian.log_weaver.LogAround;
-import com.github.hervian.log_weaver.LogBefore;
+import com.github.hervian.log_weaver.LogExiting;
+import com.github.hervian.log_weaver.LogEnteringAndExiting;
+import com.github.hervian.log_weaver.LogEntering;
 import com.github.hervian.log_weaver.exceptions.InvalidLogParametersException;
 import com.github.hervian.log_weaver.exceptions.LogAnnotationException;
 import com.github.hervian.log_weaver.weaver.LogWeaver;
@@ -51,9 +51,9 @@ public class LogProcessor extends AbstractProcessor {
 	@Override
   public Set<String> getSupportedAnnotationTypes() {
     Set<String> annotataions = new LinkedHashSet<String>();
-    annotataions.add(LogBefore.class.getCanonicalName());
-    annotataions.add(LogAround.class.getCanonicalName());
-    annotataions.add(LogAfter.class.getCanonicalName());
+    annotataions.add(LogEntering.class.getCanonicalName());
+    annotataions.add(LogEnteringAndExiting.class.getCanonicalName());
+    annotataions.add(LogExiting.class.getCanonicalName());
     return annotataions;
   }
 
@@ -96,9 +96,9 @@ public class LogProcessor extends AbstractProcessor {
 
 	@SuppressWarnings("unchecked")
 	private Set<ExecutableElement> getLogAnnotatedElements(RoundEnvironment roundEnv) {
-		Set<ExecutableElement> annotatedElements = (Set<ExecutableElement>) roundEnv.getElementsAnnotatedWith(LogAround.class);
-		annotatedElements.addAll((Set<ExecutableElement>) roundEnv.getElementsAnnotatedWith(LogBefore.class));
-		annotatedElements.addAll((Set<ExecutableElement>) roundEnv.getElementsAnnotatedWith(LogAfter.class));
+		Set<ExecutableElement> annotatedElements = (Set<ExecutableElement>) roundEnv.getElementsAnnotatedWith(LogEnteringAndExiting.class);
+		annotatedElements.addAll((Set<ExecutableElement>) roundEnv.getElementsAnnotatedWith(LogEntering.class));
+		annotatedElements.addAll((Set<ExecutableElement>) roundEnv.getElementsAnnotatedWith(LogExiting.class));
 		return annotatedElements;
 	}
 

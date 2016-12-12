@@ -6,13 +6,13 @@ import java.util.Map;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.VariableElement;
 
-import com.github.hervian.log_weaver.LogBefore;
+import com.github.hervian.log_weaver.LogEntering;
 
 public class LogBeforeWeavingTask extends WeavingTask implements ArgumentsToLogProvider {
 
-	private LogBefore log;
+	private LogEntering log;
 	
-	public LogBeforeWeavingTask(String methodName, Map<String, VariableElement> params, LogBefore log, Element element){
+	public LogBeforeWeavingTask(String methodName, Map<String, VariableElement> params, LogEntering log, Element element){
 		super(methodName, params, element);
 		this.log = log;
 	}
@@ -27,7 +27,7 @@ public class LogBeforeWeavingTask extends WeavingTask implements ArgumentsToLogP
 		return false;
 	}
 	
-	LogBefore getLog() {
+	LogEntering getLog() {
 		return log;
 	}
 	
@@ -38,7 +38,7 @@ public class LogBeforeWeavingTask extends WeavingTask implements ArgumentsToLogP
 
 	@Override
 	public Class<? extends Annotation> getLogAnnotationClass() {
-		return LogBefore.class;
+		return LogEntering.class;
 	}
 	
 }

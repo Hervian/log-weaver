@@ -7,7 +7,7 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.VariableElement;
 
 /**
- * Each use of one of the Log-annotations ({@link LogAround}, {@link LogBefore}, {@link LogAfter})
+ * Each use of one of the Log-annotations ({@link LogEnteringAndExiting}, {@link LogEntering}, {@link LogExiting})
  * will result in a WeavingTask.
  *   
  * @author Anders Granau Høfft

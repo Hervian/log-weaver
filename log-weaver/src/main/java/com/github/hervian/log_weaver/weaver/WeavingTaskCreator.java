@@ -9,9 +9,9 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.VariableElement;
 
-import com.github.hervian.log_weaver.LogAfter;
-import com.github.hervian.log_weaver.LogAround;
-import com.github.hervian.log_weaver.LogBefore;import com.github.hervian.log_weaver.ap.AnnotationUtil;
+import com.github.hervian.log_weaver.LogExiting;
+import com.github.hervian.log_weaver.LogEnteringAndExiting;
+import com.github.hervian.log_weaver.LogEntering;import com.github.hervian.log_weaver.ap.AnnotationUtil;
 import com.github.hervian.log_weaver.exceptions.AbstractMethodException;
 import com.github.hervian.log_weaver.exceptions.AnonynmousClassException;
 import com.github.hervian.log_weaver.exceptions.InvalidLogParametersException;
@@ -33,18 +33,17 @@ public enum WeavingTaskCreator {
 		if (isAbstract(element)){
 			throw new AbstractMethodException(logAnnotation);
 		}
-		if (logAnnotation instanceof LogAround){
-			return createLogAroundWeavingTask((ExecutableElement)element, (LogAround) logAnnotation);
+		if (logAnnotation instanceof LogEnteringAndExiting){
+			return createLogAroundWeavingTask((ExecutableElement)element, (LogEnteringAndExiting) logAnnotation);
 		}
-		if (logAnnotation instanceof LogBefore){
-			return createLogBeforeWeavingTask((ExecutableElement)element, (LogBefore) logAnnotation);
+		if (logAnnotation instanceof LogEntering){
+			return createLogBeforeWeavingTask((ExecutableElement)element, (LogEntering) logAnnotation);
 		}
-		return createLogAfterWeavingTask((ExecutableElement)element, (LogAfter) logAnnotation);
+		return createLogAfterWeavingTask((ExecutableElement)element, (LogExiting) logAnnotation);
 	}
 	
 	private boolean isAnonymous(Element element) {
 		String fqcn = AnnotationUtil.INSTANCE.getFullyQualifiedClassName(element);
-		System.out.println("fqcn='"+fqcn+"'");
 		return fqcn==null || fqcn.trim().isEmpty();
 	}
 
@@ -60,9 +59,9 @@ public enum WeavingTaskCreator {
 	}
 	
 	private Annotation getLogAnnotation(Element element) throws MultipleLogAnnotationsException{
-		LogAround logAround = element.getAnnotation(LogAround.class);
-		LogBefore logBefore = element.getAnnotation(LogBefore.class);
-		LogAfter logAfter = element.getAnnotation(LogAfter.class);
+		LogEnteringAndExiting logAround = element.getAnnotation(LogEnteringAndExiting.class);
+		LogEntering logBefore = element.getAnnotation(LogEntering.class);
+		LogExiting logAfter = element.getAnnotation(LogExiting.class);
 		
 		Annotation logAnnotation = null;
 		if (logAround!=null || logBefore!=null){
@@ -76,17 +75,17 @@ public enum WeavingTaskCreator {
 		return logAnnotation;
 	}
 
-	private LogAroundWeavingTask createLogAroundWeavingTask(ExecutableElement element, LogAround log) throws InvalidLogParametersException {
+	private LogAroundWeavingTask createLogAroundWeavingTask(ExecutableElement element, LogEnteringAndExiting log) throws InvalidLogParametersException {
 		Map<String, VariableElement> mapOfParams = getArgumentsToLogAndValidateAgainstAvailableParameters(element, log.value(), log);
 		return new LogAroundWeavingTask(element.getSimpleName().toString(), mapOfParams, log, element);
 	}
 	
-	private LogBeforeWeavingTask createLogBeforeWeavingTask(ExecutableElement element, LogBefore log) throws InvalidLogParametersException {
+	private LogBeforeWeavingTask createLogBeforeWeavingTask(ExecutableElement element, LogEntering log) throws InvalidLogParametersException {
 		Map<String, VariableElement> mapOfParams = getArgumentsToLogAndValidateAgainstAvailableParameters(element, log.value(), log);
 		return new LogBeforeWeavingTask(element.getSimpleName().toString(), mapOfParams, log, element);
 	}
 	
-	private LogAfterWeavingTask createLogAfterWeavingTask(ExecutableElement element, LogAfter log) {
+	private LogAfterWeavingTask createLogAfterWeavingTask(ExecutableElement element, LogExiting log) {
 		return new LogAfterWeavingTask(element.getSimpleName().toString(), element);
 	}
 

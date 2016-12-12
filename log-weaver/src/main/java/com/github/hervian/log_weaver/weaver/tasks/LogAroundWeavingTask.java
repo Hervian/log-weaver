@@ -6,13 +6,13 @@ import java.util.Map;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.VariableElement;
 
-import com.github.hervian.log_weaver.LogAround;
+import com.github.hervian.log_weaver.LogEnteringAndExiting;
 
 public class LogAroundWeavingTask extends WeavingTask implements ArgumentsToLogProvider {
 
-	private final LogAround log;
+	private final LogEnteringAndExiting log;
 	
-	public LogAroundWeavingTask(String methodName, Map<String, VariableElement> params, LogAround log, Element element){
+	public LogAroundWeavingTask(String methodName, Map<String, VariableElement> params, LogEnteringAndExiting log, Element element){
 		super(methodName, params, element);
 		this.log = log;
 	}
@@ -27,7 +27,7 @@ public class LogAroundWeavingTask extends WeavingTask implements ArgumentsToLogP
 		return true;
 	}
 	
-	LogAround getLog() {
+	LogEnteringAndExiting getLog() {
 		return log;
 	}
 	
@@ -38,7 +38,7 @@ public class LogAroundWeavingTask extends WeavingTask implements ArgumentsToLogP
 
 	@Override
 	public Class<? extends Annotation> getLogAnnotationClass() {
-		return LogAround.class;
+		return LogEnteringAndExiting.class;
 	}
 	
 }
