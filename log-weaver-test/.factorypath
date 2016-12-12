@@ -1,0 +1,4 @@
+<factorypath>
+    <factorypathentry kind="PLUGIN" id="org.eclipse.jst.ws.annotations.core" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="EXTJAR" id="/Users/Hervian/.m2/repository/com/github/hervian/log-weaver/0.0.2-SNAPSHOT/log-weaver-0.0.2-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+</factorypath>

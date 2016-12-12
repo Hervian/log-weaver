@@ -1,0 +1,15 @@
+#################
+## Eclipse
+#################
+*.classpath
+*.project
+*.settings
+*/target/**
+/target/
+/bin/**
+
+
+#################
+## Mac
+#################
+*.DS_Store
