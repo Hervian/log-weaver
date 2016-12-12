@@ -42,6 +42,7 @@ public String execute(String arg1) {
     if (LoggingHelper.isEntryExitTraceEnabled((Logger)comGithubHervian_LOGGER)) {
         comGithubHervian_LOGGER.entering(comGithubHervian_CLASSNAME, "execute", new Object[]{arg1, this});
     }
+    /*Some logic*/
     String string = "done";
     if (LoggingHelper.isEntryExitTraceEnabled((Logger)comGithubHervian_LOGGER)) {
         comGithubHervian_LOGGER.exiting(comGithubHervian_CLASSNAME, "execute", string);
@@ -53,5 +54,6 @@ public String execute(String arg1) {
 Notice that it it possible to specify exactly which arguments to log, and that it is also possible to log `this`, i.e. the object itself (off course, the object should override `toString()` for this to be useful.  
 In the code above the `LoggingHelper` is a special class from IBM's WebpShere Commerce for which this _proof of concept_ was developed. 
 You can relatively easily define what statements are weaved by modifying the logic in the class ´LogWeaver´.  
-Notice that the weaver also weaves in any fields, which is needed. In our case those fields are some some constants, fx the class name.
+Notice that the weaver also weaves in any fields, which is needed. In our case those fields are some some constants, fx the class name.  
+The logic can handle multiple return statements.  
     
