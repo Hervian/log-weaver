@@ -28,7 +28,9 @@ public String execute(String arg1) {
 The source code will remain as is, but the byte code will look **as if** the source code had been written like this:  
 
 ```java
-@LogEnteringAndExiting(value={"arg1", "this"})
+private static final Logger comGithubHervian_LOGGER = LoggingHelper.getLogger(ClassWithLogAnnotatedMethods.LogAround_log1ArgumentAndThis.class);
+private static final String = comGithubHervian_CLASSNAME = ClassWithLogAnnotatedMethods.LogAround_log1ArgumentAndThis.class.getName();
+
 public String execute(String arg1) {
     if (LoggingHelper.isEntryExitTraceEnabled((Logger)comGithubHervian_LOGGER)) {
         comGithubHervian_LOGGER.entering(comGithubHervian_CLASSNAME, "execute", new Object[]{arg1, this});
