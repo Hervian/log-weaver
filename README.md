@@ -51,7 +51,7 @@ Notice that the weaver also weaves in any fields, which is needed. In our case t
 The logic can handle multiple return statements.  
 
 ## Requirements
-lambda-factory requires Java 1.8 or later.  
+lambda-factory requires Java 1.8 or later (due to the use of [TaskListener](https://tutortrex.wordpress.com/2015/10/06/java-compiler-plug-ins-in-java-8-use-a-new-plug-in-mechanism-to-extend-the-java-compiler-with-new-behavior/). See ).  
 
 *Caveat*:   
 Currently only Javac is supported.  As such, this is a work in progress, since IBM's Rational Application Developer is based on Eclipse.  
