@@ -64,4 +64,14 @@ To get this project to work in Eclipse one will probably have to create somethin
 ## How does it work?
 The project, that defines the log-annotations, also define an AbstractProcessor ( - an annotation processor), 
 which is automatically triggered, when you compile your project.
+
+## Building from source
+log-weaver uses Maven for its build. The repository contains 2 projects: The library itself (called log-weaver), and a test-project, which can be thought of as WebSphere Commercer, i.e. this is the project, in which we use the annotations (and which defines the LoggerHelper class, assumed to exist by the log-weaver, designed as it is for WebSphere Commerce).  
+To build the complete project you must have Maven installed.  
+Then, open a terminal, navigate to the root of the log-weaver project directory and run:  
+`mvn clean install`  
+Then, navigate to the root of log-weaver-test and run:  
+`mvn clean verify`  
+This will compile the test project, and run the jUnit tests.
+If you wish to visually assert that the byte code has gotten log statements weaved into it, you should upload one of the classes to an online java decompiler.
     
