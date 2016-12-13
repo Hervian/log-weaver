@@ -3,7 +3,7 @@ Introduces an annotation processor that weaves log statements into the byte code
 annotated with `@LogEntering`, `@LogExiting` or `@LogEnteringAndExiting`.  
 
 The annotations correponds to the similarly named methods from `java.util.logging.Logger`, in that those are the log-statements 
-that will get weaved into the code. **Note** that the annotation takes "arguments", namely a list of those arguments that shall be logged.  
+that will get weaved into the code. **Note** that the annotations take "arguments", namely a list of those arguments that shall be logged.  
 
 This project serves 2 purposes:
   1. It can be used as a template for anyone, who wants to simplify their source code by replacing trivial logic (such as log-statements)
@@ -34,9 +34,7 @@ public String execute(String arg1) {
 }
 ```
 
-The project, that defines the log-annotations, also define an AbstractProcessor ( - an annotation processor), 
-which is automatically triggered, when you compile your project. It will weave log-statements in to the annotated method.  
-The source code will remain as is, but the byte code will look *as if* the source code had been written like this:  
+The source code will remain as is, but the byte code will look **as if** the source code had been written like this:  
 
 ```java
 @LogEnteringAndExiting(value={"arg1", "this"})
@@ -58,4 +56,7 @@ In the code above the `LoggingHelper` is a special class from IBM's WebpShere Co
 You can relatively easily define what statements are weaved by modifying the logic in the class ´LogWeaver´.  
 Notice that the weaver also weaves in any fields, which is needed. In our case those fields are some some constants, fx the class name.  
 The logic can handle multiple return statements.  
+## How does it work?
+The project, that defines the log-annotations, also define an AbstractProcessor ( - an annotation processor), 
+which is automatically triggered, when you compile your project.
     
