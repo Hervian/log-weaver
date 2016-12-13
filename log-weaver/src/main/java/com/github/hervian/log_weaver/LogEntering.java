@@ -8,9 +8,8 @@ public @interface LogEntering {
 
 	/**
 	 * Zero or more Strings indicating which arguments shall be logged.
-	 * Note that 'this' is also an allowed string (if and only if the method is non-static).
-	 * @return
+	 * Note that 'this' is also an allowed string (if the method is non-static).
 	 */
-	String[] value();
+	String[] value() default {};
 	
 }
