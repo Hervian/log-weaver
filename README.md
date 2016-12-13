@@ -14,14 +14,16 @@ This project serves 2 purposes:
 lambda-factory requires Java 1.8 or later.  
 
 *Caveat*:   
-Currently only Javac is supported. If you are using Eclipse (which is not based on Javac) you will get errors. 
-This is because the logic makes use of the class ´TaskListener´, which is part of Javac's internal API. 
+Currently only Javac is supported.  As such, this is a work in progress, since IBM's Rational Application Developer is based on Eclipse.  
+
+*Elaboraion*:  
+If you are using Eclipse (which is not based on Javac) you will get errors. This is because the logic makes use of the class `TaskListener`, which is part of Javac's internal API. 
 To get this project to work in Eclipse one will probably have to create something a la The Checker Framework's Eclipse Plugin 
-(as I imagine that that plugin has been created for the same reasons, since the Checker Framework also makes use of the Javac's TaskListener.
+(as I imagine that that plugin has been created for the same reasons, since the Checker Framework also makes use of the Javac's TaskListener.) Alternatively, one might be able handle the problem in a build script, by adding an extra step that uses Javac to perform annotation processing (pass proc:only argument to the compiler).
 
 ## Using log-weaver
 log-weaver was created to add logging-logic for entering and exiting a method.
-Simple annotate a method with one of the log methods (`@LogEntering`, `@LogExiting` or `@LogEnteringAndExiting`).  
+Simply annotate a method with one of the log methods (`@LogEntering`, `@LogExiting` or `@LogEnteringAndExiting`).  
 Say we have the following method, which we have annotated with ´@LogEnteringAndExiting´:  
 
 ```java
